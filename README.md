@@ -1,16 +1,50 @@
-# React + Vite
+# Social Media Content Scheduler - Backend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Node Version](https://img.shields.io/badge/node-v14+-green)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/your-repo)
 
-Currently, two official plugins are available:
+A Node.js backend API for managing social media content scheduling with user authentication and post management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📑 Table of Contents
+- [Features](#-features)
+- [Prerequisites](#-prerequisites)
+- [Installation & Setup](#-installation--setup)
+- [Environment Variables Template](#-environment-variables-template)
+- [API Documentation](#-api-documentation)
+- [Project Structure](#-project-structure)
+- [Available Scripts](#-available-scripts)
+- [Authentication Flow](#-authentication-flow)
+- [Database Models](#-database-models)
+- [Assumptions & Notes](#-assumptions--notes)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [Support](#-support)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
+- User Authentication (Register/Login with JWT)  
+- Content Scheduling  
+- Social Media Post Management  
+- RESTful API Architecture  
+- MongoDB Integration  
+- JWT-based Security  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📋 Prerequisites
+- Node.js (v14 or higher)  
+- MongoDB (local or cloud instance)  
+- npm or yarn  
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+```bash
+git clone <your-repository-url>
+cd social-media-content-scheduler-backend
