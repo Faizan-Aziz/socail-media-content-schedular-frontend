@@ -38,7 +38,7 @@ A Node.js backend API for managing social media content scheduling with user aut
 ## 📋 Prerequisites
 - Node.js (v14 or higher)  
 - MongoDB (local or cloud instance)  
-- npm or yarn  
+- npm 
 
 ---
 
