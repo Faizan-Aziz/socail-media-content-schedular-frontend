@@ -1,29 +1,17 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "https://social-media-content-scheduler.onrender.com/api/$1"
+      "source": "/api/:match*",
+      "destination": "https://social-media-content-scheduler.onrender.com/api/:match*"
     },
     {
-      "src": "/(.*\\.\\w+)",
-      "dest": "/$1"
+      "source": "/user/:match*", 
+      "destination": "https://social-media-content-scheduler.onrender.com/user/:match*"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/"
     }
-  ],
-  "env": {
-    "VITE_API_BASE_URL": "https://social-media-content-scheduler.onrender.com"
-  }
+  ]
 }
+
