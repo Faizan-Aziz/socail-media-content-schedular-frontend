@@ -40,7 +40,6 @@ npm install
 
 Create a `.env` file in the root directory with the following variables:
 
-```env
 # Server Configuration
 PORT=5000
 
@@ -57,7 +56,6 @@ JWT_SECRET=your-super-secret-jwt-key-here
 
 ### 4. Start the Development Server
 
-```bash
 npm run dev
 
 
