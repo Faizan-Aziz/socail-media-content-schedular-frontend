@@ -24,7 +24,7 @@ A Node.js backend API for managing social media content scheduling with user aut
 ## ⚙️ Installation & Setup
 
 ### 1. Clone the repository
-```bash
+
 git clone <your-repository-url>
 cd social-media-content-scheduler-backend
 
