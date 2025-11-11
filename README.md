@@ -28,11 +28,13 @@ A Node.js backend API for managing social media content scheduling with user aut
 git clone <your-repository-url>
 cd social-media-content-scheduler-backend
 
+---
 
 ## 2. Install Dependencies
 ```bash
 npm install
 
+---
 
 ### 3. Environment Configuration
 
@@ -51,6 +53,7 @@ JWT_SECRET=your-super-secret-jwt-key-here
 # Optional: Production Database (if using MongoDB Atlas)
 # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/social-media-scheduler
 
+---
 
 ### 4. Start the Development Server
 
