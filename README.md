@@ -85,8 +85,8 @@ JWT_SECRET=your-jwt-secret-key-change-in-production
 
 `POST /api/auth/register`  
 
-**Request Body:**
-```json
+**Request Body**
+
 {
   "username": "user123",
   "email": "user@example.com",
