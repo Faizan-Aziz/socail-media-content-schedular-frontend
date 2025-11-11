@@ -1,0 +1,97 @@
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.post-item {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.post-item p {
+  margin: 5px 0;
+}
+
+.post-item img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.post-item button {
+  background-color: #ff4b4b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.post-item button:hover {
+  background-color: #e63946;
+}
+
+/* PostList.css additions */
+.post-item {
+  border-left: 4px solid;
+  padding: 15px;
+  margin: 10px 0;
+  background: white;
+  border-radius: 8px;
+}
+
+.post-item.scheduled { border-left-color: #ffa500; }
+.post-item.published { border-left-color: #28a745; }
+.post-item.failed { border-left-color: #dc3545; }
+
+.status {
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.status.scheduled { background: #fff3cd; color: #856404; }
+.status.published { background: #d4edda; color: #155724; }
+.status.failed { background: #f8d7da; color: #721c24; }
+
+.post-message {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  font-style: italic;
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+.edit-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: #0056b3;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
