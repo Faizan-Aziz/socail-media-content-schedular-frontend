@@ -73,6 +73,7 @@ MONGODB_URI=mongodb://localhost:27017/social-media-scheduler
 JWT_SECRET=your-jwt-secret-key-change-in-production
 
 #### Optional: For production
+
 #### NODE_ENV=production
 
 
@@ -81,6 +82,7 @@ JWT_SECRET=your-jwt-secret-key-change-in-production
 #### Authentication Endpoints
 
 **Register User**  
+
 `POST /api/auth/register`  
 
 **Request Body:**
@@ -95,7 +97,7 @@ JWT_SECRET=your-jwt-secret-key-change-in-production
 `POST /api/auth/login`  
 
 **Request Body:**
-```json
+
 {
   "email": "user@example.com",
   "password": "password123"
@@ -113,7 +115,7 @@ JWT_SECRET=your-jwt-secret-key-change-in-production
 **Headers:** `Authorization: Bearer <jwt-token>`  
 
 **Request Body:**
-```json
+
 {
   "content": "Post content here",
   "scheduleTime": "2024-01-01T10:00:00.000Z",
@@ -158,7 +160,7 @@ npm test        # Run tests (if configured)
 ### 💾 Database Models
 
 #### User Model
-```javascript
+
 {
   username: String,
   email: String,
@@ -168,7 +170,7 @@ npm test        # Run tests (if configured)
 
 
 #### Post Model
-```javascript
+
 {
   content: String,
   scheduleTime: Date,
