@@ -32,7 +32,6 @@ cd social-media-content-scheduler-backend
 
 ### 2. Install Dependencies
 
-```bash
 npm install
 
 
