@@ -38,7 +38,6 @@ A modern, responsive React frontend for scheduling and managing social media con
 - Vite (dev server and build tool)
 - Axios (HTTP client)
 - CSS3 (project-specific conventions)
-- Optional: socket.io or SSE for real-time synchronization
 
 ---
 
@@ -46,15 +45,14 @@ A modern, responsive React frontend for scheduling and managing social media con
 
 Add links or images here when available.
 
-- Live demo: https://your-vercel-deployment.vercel.app (replace with actual URL)
-- Screenshots: /docs/screenshots/*.png
+- Live demo: https://socail-media-content-schedular.vercel.app/
 
 ---
 
 ## Prerequisites
 
 - Node.js v18+ (or current LTS)
-- npm v8+ or yarn
+- npm v8+
 
 ---
 
@@ -120,7 +118,7 @@ This frontend expects a backend API that provides:
 - Authentication endpoints for login/register returning JWT tokens
 - CRUD endpoints for posts (create, read, update, delete)
 - Scheduling endpoints for queuing posts for future publication
-- (Optional) Real-time endpoints via WebSocket or Server-Sent Events for live updates
+
 
 Best practices:
 
@@ -184,4 +182,3 @@ Maintained by Faizan Aziz — https://github.com/Faizan-Aziz
 
 ---
 
-Thank you for using this project — update the Demo, Screenshots, and License sections with project-specific details as they become available.
