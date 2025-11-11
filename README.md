@@ -1,235 +1,76 @@
-# Social Media Content Scheduler - Backend
+Social Media Content Scheduler - Frontend
+A modern React application for scheduling and managing social media content across multiple platforms.
 
-A Node.js backend API for managing social media content scheduling with user authentication and post management.
+🚀 Features
+User Authentication - Login/Register with JWT
 
----
+Content Management - Create, edit, delete, and schedule posts
 
-## 🚀 Features
-- User Authentication (Register/Login with JWT)
-- Content Scheduling
-- Social Media Post Management
-- RESTful API Architecture
-- MongoDB Integration
-- JWT-based Security
+Responsive Design - Works on all devices
 
----
+Real-time Updates - Live content synchronization
 
-## 📋 Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (local or cloud instance)
-- npm or yarn
+🛠️ Tech Stack
+React - Frontend framework
 
----
+Vite - Build tool and dev server
 
-## ⚙️ Installation & Setup
+Axios - API communication
 
-### 1. Clone the repository
+CSS3 - Styling
 
-git clone<your-repository-url>
+📦 Installation
+bash
+# Clone the repository
+git clone https://github.com/your-username/social-media-content-scheduler-frontend.git
 
-cd social-media-content-scheduler-backend
+# Navigate to project directory
+cd social-media-content-scheduler-frontend
 
-
-
-### 2. Install Dependencies
-
+# Install dependencies
 npm install
 
-
-
-### 3. Environment Configuration
-
-Create a `.env` file in the root directory with the following variables:
-
-#### Server Configuration
-PORT=5000
-
-#### Database
-MONGODB_URI=mongodb://localhost:27017/social-media-scheduler
-
-#### JWT Secret
-JWT_SECRET=your-super-secret-jwt-key-here
-
-#### Optional: Production Database (if using MongoDB Atlas)
-
-#### MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/social-media-scheduler
-
----
-
-### 4. Start the Development Server
-
+# Start development server
 npm run dev
+⚙️ Environment Setup
+Create a .env file in the root directory:
 
+env
+VITE_API_BASE_URL=http://localhost:5000
+For production:
 
-### 🗄️ Environment Variables Template
+env
+VITE_API_BASE_URL=https://your-backend-domain.com
+🎯 Available Scripts
+bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+🔗 API Integration
+The frontend connects to the backend API for:
 
-#### Server
-PORT=5000
+User authentication (login/register)
 
-#### Database
-MONGODB_URI=mongodb://localhost:27017/social-media-scheduler
+Content management (CRUD operations)
 
-#### JWT
-JWT_SECRET=your-jwt-secret-key-change-in-production
+Post scheduling
 
-#### Optional: For production
+🌐 Deployment
+Deploy to Vercel
+Push your code to GitHub
 
-#### NODE_ENV=production
+Connect repository to Vercel
 
+Add environment variables in Vercel dashboard
 
-#### 📚 API Documentation
+Deploy automatically
 
-#### Authentication Endpoints
+📱 Usage
+Register/Login to your account
 
-**Register User**  
+Create new social media posts
 
-`POST /api/auth/register`  
+Schedule posts for future publishing
 
-**Request Body**
-
-{
-  "username": "user123",
-  "email": "user@example.com",
-  "password": "password123"
-}
-
-**Login User**  
-`POST /api/auth/login`  
-
-**Request Body:**
-
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-
-
-#### Content Endpoints
-
-**Get All Posts**  
-`GET /api/content/posts`  
-**Headers:** `Authorization: Bearer <jwt-token>`
-
-**Create New Post**  
-`POST /api/content/posts`  
-**Headers:** `Authorization: Bearer <jwt-token>`  
-
-**Request Body:**
-
-{
-  "content": "Post content here",
-  "scheduleTime": "2024-01-01T10:00:00.000Z",
-  "platform": "twitter"
-}
-
-
-**Update Post**  
-`PUT /api/content/posts/:id`  
-**Headers:** `Authorization: Bearer <jwt-token>`
-
-**Delete Post**  
-`DELETE /api/content/posts/:id`  
-**Headers:** `Authorization: Bearer <jwt-token>`
-
-
-### 🏗️ Project Structure
-backend/
-├── controllers/ # Route controllers
-├── models/ # MongoDB models
-├── routes/ # API routes
-├── middleware/ # Custom middleware (auth, etc.)
-├── config/ # Database configuration
-├── .env # Environment variables (gitignored)
-├── package.json
-└── server.js # Entry point
-
-### 🛠️ Available Scripts
-
-```bash
-npm run dev     # Start development server with nodemon
-npm start       # Start production server
-npm test        # Run tests (if configured)
-
-### 🔐 Authentication Flow
-
-1. User registers / gets JWT token
-2. Include token in request headers: `Authorization: Bearer <token>`
-3. Protected routes verify token before processing
-
-
-### 💾 Database Models
-
-#### User Model
-
-{
-  username: String,
-  email: String,
-  password: String, // hashed
-  createdAt: Date
-}
-
-
-#### Post Model
-
-{
-  content: String,
-  scheduleTime: Date,
-  platform: String,
-  status: String,
-  userId: ObjectId,
-  createdAt: Date
-}
-
-
-### 🚨 Assumptions & Notes
-
-#### Assumptions Made
-- MongoDB is running locally on default port 27017
-- JWT tokens are used for stateless authentication
-- Passwords are hashed before storage
-- Frontend will handle token storage and automatic inclusion in headers
-- All dates are handled in UTC format
-
-#### Security Notes
-- Always use strong JWT secrets in production
-- Change default MongoDB credentials
-- Use environment variables for all sensitive data
-- Consider rate limiting for production deployment
-
-#### Development Notes
-- CORS is configured for frontend communication
-- Error handling middleware is included
-- Console logging for development debugging
-
-
-### 🌐 Deployment
-
-#### Render.com Deployment
-1. Connect your GitHub repository
-2. Set environment variables in the Render dashboard
-3. Deploy automatically from the main branch
-
-#### Environment Variables for Production
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database
-JWT_SECRET=your-production-jwt-secret
-NODE_ENV=production
-
-
-#### Environment Variables for Production
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database
-JWT_SECRET=your-production-jwt-secret
-
-
-### 🤝 Contributing
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-### 📞 Support
-For issues and questions, please create an issue in the GitHub repository.
-
+Manage your content dashboard
 
