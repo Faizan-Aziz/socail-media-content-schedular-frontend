@@ -26,6 +26,7 @@ A Node.js backend API for managing social media content scheduling with user aut
 ### 1. Clone the repository
 
 git clone <your-repository-url>
+
 cd social-media-content-scheduler-backend
 
 
@@ -40,17 +41,18 @@ npm install
 
 Create a `.env` file in the root directory with the following variables:
 
-# Server Configuration
+#### Server Configuration
 PORT=5000
 
-# Database
+#### Database
 MONGODB_URI=mongodb://localhost:27017/social-media-scheduler
 
-# JWT Secret
+#### JWT Secret
 JWT_SECRET=your-super-secret-jwt-key-here
 
-# Optional: Production Database (if using MongoDB Atlas)
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/social-media-scheduler
+#### Optional: Production Database (if using MongoDB Atlas)
+
+#### MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/social-media-scheduler
 
 ---
 
@@ -61,21 +63,20 @@ npm run dev
 
 ### 🗄️ Environment Variables Template
 
-```env
-# Server
+#### Server
 PORT=5000
 
-# Database
+#### Database
 MONGODB_URI=mongodb://localhost:27017/social-media-scheduler
 
-# JWT
+#### JWT
 JWT_SECRET=your-jwt-secret-key-change-in-production
 
-# Optional: For production
-# NODE_ENV=production
+#### Optional: For production
+#### NODE_ENV=production
 
 
-### 📚 API Documentation
+#### 📚 API Documentation
 
 #### Authentication Endpoints
 
