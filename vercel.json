@@ -24,6 +24,6 @@
     }
   ],
   "env": {
-    "VITE_API_BASE_URL": "/api"
+    "VITE_API_BASE_URL": "https://social-media-content-scheduler.onrender.com"
   }
 }
