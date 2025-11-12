@@ -18,31 +18,31 @@ const EditPost = () => {
   const [loading, setLoading] = useState(true);
 
   // Fetch post data
- useEffect(() => {
-  const fetchPost = async () => {
-    try {
-      const { data } = await axios.get(`/api/posts/${id}`, { withCredentials: true });
+    useEffect(() => {
+        const fetchPost = async () => {
+            try {
+                const { data } = await axios.get(`/api/posts/${id}`, { withCredentials: true });
 
-      // Convert UTC to local ISO string for datetime-local
-      const localScheduled = new Date(data.scheduledAt);
-      const tzOffset = localScheduled.getTimezoneOffset() * 60000; // in ms
-      const localISOTime = new Date(localScheduled - tzOffset).toISOString().slice(0, 16);
+                // ✅ Convert UTC from backend to local time
+                const utcDate = new Date(data.scheduledAt);
+                const tzOffset = utcDate.getTimezoneOffset() * 60000; // in ms
+                const localISO = new Date(utcDate.getTime() - tzOffset).toISOString().slice(0, 16);
 
-      setFormData({
-        content: data.content,
-        platforms: data.platforms,
-        scheduledAt: localISOTime,
-        imageUrl: data.imageUrl
-      });
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching post:", error);
-      setLoading(false);
-    }
-  };
-  fetchPost();
-}, [id]);
+                setFormData({
+                    content: data.content,
+                    platforms: data.platforms,
+                    scheduledAt: localISO,
+                    imageUrl: data.imageUrl,
+                });
 
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching post:", error);
+                setLoading(false);
+            }
+        };
+        fetchPost();
+    }, [id]);
 
   // Simple state updater
   const handleChange = (e) => {
