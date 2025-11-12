@@ -13,8 +13,7 @@ const PostForm = ({ fetchPosts }) => {
   const [loading, setLoading] = useState(false);
 
   
-
-  const handleChange = (e) => {
+ const handleChange = (e) => {
   const { name, value } = e.target;
 
   if (name === "scheduledAt") {
@@ -32,10 +31,6 @@ const PostForm = ({ fetchPosts }) => {
   setFormData({ ...formData, [name]: value });
 };
 
-
-
-  setFormData({ ...formData, [name]: value });
-};
 
 
 
