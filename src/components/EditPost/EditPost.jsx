@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./EditPost.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify"; // ✅ Add toast
+import { toast } from "react-toastify";
 
 const EditPost = () => {
   const { id } = useParams();
@@ -37,27 +37,13 @@ const EditPost = () => {
     fetchPost();
   }, [id]);
 
-  // Handle input changes
+  // Simple state updater
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // ✅ Validation for scheduledAt
-    if (name === "scheduledAt") {
-      const selected = new Date(value);
-      const now = new Date();
-
-      if (selected < now) {
-        toast.error("❌ You cannot select a past date or time.");
-        return; // stop the change
-      } else {
-        toast.success("✅ Scheduled time updated!");
-      }
-    }
-
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle platforms
+  // Handle platform checkboxes
   const handlePlatformChange = (e) => {
     const { value, checked } = e.target;
     setFormData((prev) => ({
@@ -68,17 +54,26 @@ const EditPost = () => {
     }));
   };
 
-  // Submit updated data with validation
+  // Submit with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Content & scheduledAt validation
-    if (!formData.content || !formData.scheduledAt) {
-      toast.error("Content and Scheduled Time are required");
+    const selected = new Date(formData.scheduledAt);
+    const now = new Date();
+
+    // Validate scheduled date/time
+    if (selected < now) {
+      toast.error("❌ You cannot select a past date or time.");
       return;
     }
 
-    // ✅ Platforms validation
+    // Validate content
+    if (!formData.content) {
+      toast.error("Content is required");
+      return;
+    }
+
+    // Validate platforms
     if (formData.platforms.length === 0) {
       toast.error("Please select at least one platform (Instagram, Facebook, or Twitter).");
       return;
@@ -105,7 +100,6 @@ const EditPost = () => {
           name="content"
           value={formData.content}
           onChange={handleChange}
-          required
         />
 
         <label>Platforms:</label>
@@ -129,8 +123,7 @@ const EditPost = () => {
           name="scheduledAt"
           value={formData.scheduledAt}
           onChange={handleChange}
-          min={new Date().toISOString().slice(0, 16)} // ✅ Prevent past date/time
-          required
+          min={new Date().toISOString().slice(0, 16)} // Prevent past date/time
         />
 
         <label>Image URL:</label>
