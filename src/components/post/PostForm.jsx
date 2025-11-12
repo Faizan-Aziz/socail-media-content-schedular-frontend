@@ -12,27 +12,11 @@ const PostForm = ({ fetchPosts }) => {
   });
   const [loading, setLoading] = useState(false);
 
-  
- const handleChange = (e) => {
-  const { name, value } = e.target;
-
-  if (name === "scheduledAt") {
-    const selected = new Date(value);
-    const now = new Date();
-
-    if (selected < now) {
-      toast.error("❌ You cannot select a past date or time.");
-      return; // stop the change
-    } else {
-      toast.success("✅ Scheduled time set successfully!");
-    }
-  }
-
-  setFormData({ ...formData, [name]: value });
-};
-
-
-
+  // ✅ Simple handleChange: just updates state
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleCheckbox = (e) => {
     const { value, checked } = e.target;
@@ -46,24 +30,33 @@ const PostForm = ({ fetchPosts }) => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (!formData.content || !formData.scheduledAt) {
-      toast.error("Content and Scheduled Time are required");
+    const selected = new Date(formData.scheduledAt);
+    const now = new Date();
+
+    // Validate scheduled date/time
+    if (selected < now) {
+      toast.error("❌ You cannot select a past date or time.");
       return;
     }
 
+    // Validate content
+    if (!formData.content) {
+      toast.error("Content is required");
+      return;
+    }
+
+    // Validate platforms
     if (formData.platforms.length === 0) {
       toast.error("Please select at least one platform (Instagram, Facebook, or Twitter).");
       return;
     }
 
-
     try {
       setLoading(true);
-      const res = await axios.post("/api/posts", formData, {
-        withCredentials: true,
-      });
+      await axios.post("/api/posts", formData, { withCredentials: true });
       toast.success("Post created successfully!");
       setFormData({ content: "", platforms: [], scheduledAt: "", imageUrl: "" });
       fetchPosts();
@@ -75,7 +68,6 @@ const PostForm = ({ fetchPosts }) => {
     }
   };
 
-
   return (
     <div className="post-form">
       <h3>Create New Post</h3>
@@ -83,36 +75,21 @@ const PostForm = ({ fetchPosts }) => {
         name="content"
         placeholder="Write your post content here..."
         value={formData.content}
-        onChange={handleChange}
+        onChange={handleChange} // ✅ This now exists
       />
+
       <div className="platforms">
-        <label>
-          <input
-            type="checkbox"
-            value="Instagram"
-            checked={formData.platforms.includes("Instagram")}
-            onChange={handleCheckbox}
-          />
-          Instagram
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Facebook"
-            checked={formData.platforms.includes("Facebook")}
-            onChange={handleCheckbox}
-          />
-          Facebook
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Twitter"
-            checked={formData.platforms.includes("Twitter")}
-            onChange={handleCheckbox}
-          />
-          Twitter
-        </label>
+        {["Instagram", "Facebook", "Twitter"].map((platform) => (
+          <label key={platform}>
+            <input
+              type="checkbox"
+              value={platform}
+              checked={formData.platforms.includes(platform)}
+              onChange={handleCheckbox}
+            />
+            {platform}
+          </label>
+        ))}
       </div>
 
       <input
@@ -122,7 +99,6 @@ const PostForm = ({ fetchPosts }) => {
         onChange={handleChange}
         min={new Date().toISOString().slice(0, 16)} // ✅ prevents past date & time
       />
-
 
       <input
         type="text"
