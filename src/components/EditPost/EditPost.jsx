@@ -18,24 +18,31 @@ const EditPost = () => {
   const [loading, setLoading] = useState(true);
 
   // Fetch post data
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const { data } = await axios.get(`/api/posts/${id}`, { withCredentials: true });
-        setFormData({
-          content: data.content,
-          platforms: data.platforms,
-          scheduledAt: data.scheduledAt.slice(0, 16),
-          imageUrl: data.imageUrl
-        });
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching post:", error);
-        setLoading(false);
-      }
-    };
-    fetchPost();
-  }, [id]);
+ useEffect(() => {
+  const fetchPost = async () => {
+    try {
+      const { data } = await axios.get(`/api/posts/${id}`, { withCredentials: true });
+
+      // Convert UTC to local ISO string for datetime-local
+      const localScheduled = new Date(data.scheduledAt);
+      const tzOffset = localScheduled.getTimezoneOffset() * 60000; // in ms
+      const localISOTime = new Date(localScheduled - tzOffset).toISOString().slice(0, 16);
+
+      setFormData({
+        content: data.content,
+        platforms: data.platforms,
+        scheduledAt: localISOTime,
+        imageUrl: data.imageUrl
+      });
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching post:", error);
+      setLoading(false);
+    }
+  };
+  fetchPost();
+}, [id]);
+
 
   // Simple state updater
   const handleChange = (e) => {
