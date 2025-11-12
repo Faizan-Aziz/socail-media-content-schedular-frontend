@@ -12,9 +12,24 @@ const PostForm = ({ fetchPosts }) => {
   });
   const [loading, setLoading] = useState(false);
 
+  
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { name, value } = e.target;
+
+  if (name === "scheduledAt") {
+    const selected = new Date(value);
+    const now = new Date();
+
+    if (selected < now) {
+      toast.error("You cannot select a past date or time.");
+      return; // stop the change
+    }
+  }
+
+  setFormData({ ...formData, [name]: value });
+};
+
+
 
   const handleCheckbox = (e) => {
     const { value, checked } = e.target;
@@ -29,10 +44,17 @@ const PostForm = ({ fetchPosts }) => {
   };
 
   const handleSubmit = async () => {
+
     if (!formData.content || !formData.scheduledAt) {
       toast.error("Content and Scheduled Time are required");
       return;
     }
+
+    if (formData.platforms.length === 0) {
+      toast.error("Please select at least one platform (Instagram, Facebook, or Twitter).");
+      return;
+    }
+
 
     try {
       setLoading(true);
@@ -49,6 +71,7 @@ const PostForm = ({ fetchPosts }) => {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="post-form">
@@ -94,7 +117,9 @@ const PostForm = ({ fetchPosts }) => {
         name="scheduledAt"
         value={formData.scheduledAt}
         onChange={handleChange}
+        min={new Date().toISOString().slice(0, 16)} // ✅ prevents past date & time
       />
+
 
       <input
         type="text"
