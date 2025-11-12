@@ -13,6 +13,7 @@ const PostForm = ({ fetchPosts }) => {
   const [loading, setLoading] = useState(false);
 
   
+
   const handleChange = (e) => {
   const { name, value } = e.target;
 
@@ -21,10 +22,17 @@ const PostForm = ({ fetchPosts }) => {
     const now = new Date();
 
     if (selected < now) {
-      toast.error("You cannot select a past date or time.");
+      toast.error("❌ You cannot select a past date or time.");
       return; // stop the change
+    } else {
+      toast.success("✅ Scheduled time set successfully!");
     }
   }
+
+  setFormData({ ...formData, [name]: value });
+};
+
+
 
   setFormData({ ...formData, [name]: value });
 };
