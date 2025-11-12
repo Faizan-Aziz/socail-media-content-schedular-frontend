@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./EditPost.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify"; // ✅ Add toast
 
 const EditPost = () => {
-  const { id } = useParams(); // get post id from URL
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const EditPost = () => {
 
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch post data for editing
+  // Fetch post data
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -24,7 +25,7 @@ const EditPost = () => {
         setFormData({
           content: data.content,
           platforms: data.platforms,
-          scheduledAt: data.scheduledAt.slice(0, 16), // convert to local datetime
+          scheduledAt: data.scheduledAt.slice(0, 16),
           imageUrl: data.imageUrl
         });
         setLoading(false);
@@ -36,13 +37,27 @@ const EditPost = () => {
     fetchPost();
   }, [id]);
 
-  // ✅ Handle input changes
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // ✅ Validation for scheduledAt
+    if (name === "scheduledAt") {
+      const selected = new Date(value);
+      const now = new Date();
+
+      if (selected < now) {
+        toast.error("❌ You cannot select a past date or time.");
+        return; // stop the change
+      } else {
+        toast.success("✅ Scheduled time updated!");
+      }
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ✅ Handle checkbox (multiple platforms)
+  // Handle platforms
   const handlePlatformChange = (e) => {
     const { value, checked } = e.target;
     setFormData((prev) => ({
@@ -53,16 +68,29 @@ const EditPost = () => {
     }));
   };
 
-  // ✅ Submit updated data
+  // Submit updated data with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ✅ Content & scheduledAt validation
+    if (!formData.content || !formData.scheduledAt) {
+      toast.error("Content and Scheduled Time are required");
+      return;
+    }
+
+    // ✅ Platforms validation
+    if (formData.platforms.length === 0) {
+      toast.error("Please select at least one platform (Instagram, Facebook, or Twitter).");
+      return;
+    }
+
     try {
       await axios.put(`/api/posts/${id}`, formData, { withCredentials: true });
-      alert("Post updated successfully!");
+      toast.success("Post updated successfully!");
       navigate("/dashboard");
     } catch (error) {
       console.error("Error updating post:", error);
-      alert("Failed to update post.");
+      toast.error("Failed to update post");
     }
   };
 
@@ -72,7 +100,6 @@ const EditPost = () => {
     <div className="edit-post-container">
       <h2>Edit Scheduled Post</h2>
       <form onSubmit={handleSubmit} className="edit-post-form">
-
         <label>Content:</label>
         <textarea
           name="content"
@@ -102,6 +129,7 @@ const EditPost = () => {
           name="scheduledAt"
           value={formData.scheduledAt}
           onChange={handleChange}
+          min={new Date().toISOString().slice(0, 16)} // ✅ Prevent past date/time
           required
         />
 
