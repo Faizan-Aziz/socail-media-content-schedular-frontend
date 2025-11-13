@@ -12,7 +12,7 @@ const formatLocalDate = (utcDateString) => {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false, // Set true for AM/PM
+    hour12: true,
   });
 };
 
