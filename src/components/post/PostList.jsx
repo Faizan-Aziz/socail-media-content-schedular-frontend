@@ -4,6 +4,18 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+// Helper to format UTC dates to local time
+const formatLocalDate = (utcDateString) => {
+  return new Date(utcDateString).toLocaleString(undefined, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false, // Set true for AM/PM
+  });
+};
+
 const PostList = ({ posts, fetchPosts, loading }) => {
   const navigate = useNavigate();
 
@@ -22,7 +34,7 @@ const PostList = ({ posts, fetchPosts, loading }) => {
   };
 
   if (loading) return <p>Loading...</p>;
-  if (posts.length === 0) return <p>No posts created yet.</p>;
+  if (!posts || posts.length === 0) return <p>No posts created yet.</p>;
 
   return (
     <div className="post-list">
@@ -30,18 +42,19 @@ const PostList = ({ posts, fetchPosts, loading }) => {
         <div key={post._id} className={`post-item ${post.status}`}>
           <p><strong>Content:</strong> {post.content}</p>
           <p><strong>Platforms:</strong> {post.platforms.join(", ")}</p>
-          <p><strong>Scheduled:</strong> {new Date(post.scheduledAt).toLocaleString()}</p>
-          <p><strong>Status:</strong> 
+          <p><strong>Scheduled:</strong> {formatLocalDate(post.scheduledAt)}</p>
+          <p>
+            <strong>Status:</strong>{" "}
             <span className={`status ${post.status}`}>
-              {post.status === "scheduled" ? "⏳ Scheduled" : 
+              {post.status === "scheduled" ? "⏳ Scheduled" :
                post.status === "published" ? "✅ Published" : "❌ Failed"}
             </span>
           </p>
+
           {post.imageUrl && (
             <img src={post.imageUrl} alt="Post" className="post-image" />
           )}
 
-          {/* ✅ SHOW BUTTONS ONLY FOR SCHEDULED POSTS */}
           {post.status === "scheduled" ? (
             <div className="post-actions">
               <button className="edit-btn" onClick={() => handleEdit(post._id)}>
@@ -52,10 +65,9 @@ const PostList = ({ posts, fetchPosts, loading }) => {
               </button>
             </div>
           ) : (
-            // ✅ SHOW MESSAGE FOR PUBLISHED/FAILED POSTS
             <div className="post-message">
-              {post.status === "published" 
-                ? "✅ This post has been published and cannot be edited or deleted" 
+              {post.status === "published"
+                ? "✅ This post has been published and cannot be edited or deleted"
                 : "❌ This post failed to publish"}
             </div>
           )}
